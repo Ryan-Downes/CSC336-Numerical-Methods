@@ -1,0 +1,28 @@
+h = zeros(1, 170);
+for j = 1:17
+    for k = 0:9
+       h(j + 17*k) = 10^(-j);
+    end
+end
+d0 = zeros(1, 170);
+d1 = zeros(1, 170);
+d2 = zeros(1, 170);
+
+for a = 1:10
+    
+    for b = 1:17
+        d0(b + 17*(a - 1)) = 1/ (2 * sqrt(a));
+        
+        d1(b + 17 *(a - 1)) = (sqrt(a + h(b)) - sqrt(a - h(b)))/(2 * h(b));
+        d2(b + 17 * (a - 1)) = 1/ (sqrt(a + h(b)) + sqrt(a - h(b)));
+    end
+end
+fprintf('%3d %17.14f %17.14f %17.14f %8.1e %8.1e\n', b, d0, d1, d2, d0-d1, d0-d2);
+dif2 = d0-d2;
+dif1 = d0-d1;
+
+loglog(h, dif1);
+axis([1e-18 2e-1 1e-17 1]);
+
+
+loglog(h, dif2);

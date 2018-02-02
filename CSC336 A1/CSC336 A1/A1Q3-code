@@ -1,0 +1,20 @@
+s0 = ((pi)^2)/6;
+
+cur = 0;
+prev = 1;
+j = 1;
+while cur ~= prev
+    prev = cur;
+    cur = cur + 1/(j^2);
+    j = j+1;
+end 
+s1 = cur;
+
+k = 1;
+s2 = 0;
+
+for k = 1:(20*j)
+    s2 = s2 +(((j*20 - k) + 1)^(-2)); 
+end
+fprintf('%12d %18.16f %18.16f %8.1e\n', j-1, s0, s1, (s0-s1)/s0);
+fprintf('%12d %18.16f %18.16f %8.1e\n', k-1, s0, s2, (s0-s2)/s0);
